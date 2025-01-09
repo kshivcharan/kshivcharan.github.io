@@ -1,51 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQLite Data Display</title>
-</head>
-<body>
-    <h1>User Data</h1>
-    <table id="userTable" border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-        </tr>
-    </table>
+const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
-    <script>
-        // Initialize the database
-        const loadDatabase = async () => {
-            const response = await fetch('example.db');  // Your SQLite file on the server
-            const buffer = await response.arrayBuffer();
-            const db = new SQL.Database(new Uint8Array(buffer));
+const app = express();
+const port = process.env.PORT || 5000;
 
-            // Query the database
-            const stmt = db.prepare("SELECT id, name, age FROM users");
-            const results = [];
+// Middleware
+app.use(cors());  // Allow cross-origin requests from GitHub Pages
+app.use(bodyParser.json());
 
-            while (stmt.step()) {
-                const row = stmt.get();
-                results.push(row);
-            }
+// Connect to SQLite database
+const db = new sqlite3.Database('./example.db', (err) => {
+  if (err) {
+    console.error("Error opening database: " + err.message);
+  } else {
+    console.log("Connected to the SQLite database.");
+  }
+});
 
-            // Populate the table with data
-            const table = document.getElementById('userTable');
-            results.forEach(row => {
-                const tr = document.createElement('tr');
-                row.forEach(cell => {
-                    const td = document.createElement('td');
-                    td.textContent = cell;
-                    tr.appendChild(td);
-                });
-                table.appendChild(tr);
-            });
-        };
+// API Endpoint to insert data
+app.post('/insert', (req, res) => {
+  const { name, age } = req.body;
 
-        loadDatabase();
-    </script>
-</body>
-</html>
+  const stmt = db.prepare("INSERT INTO users (name, age) VALUES (?, ?)");
+  stmt.run(name, age, function(err) {
+    if (err) {
+      res.status(500).json({ message: 'Failed to insert data' });
+    } else {
+      res.status(200).json({ message: 'Data inserted successfully' });
+    }
+  });
+  stmt.finalize();
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
