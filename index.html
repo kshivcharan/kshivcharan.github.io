@@ -1,40 +1,56 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const bodyParser = require('body-parser');
-const cors = require('cors');
+<!DOCTYPE html>
+<html lang="en">
 
-const app = express();
-const port = process.env.PORT || 5000;
+<head>
+  <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
 
-// Middleware
-app.use(cors());  // Allow cross-origin requests from GitHub Pages
-app.use(bodyParser.json());
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://glitch.com/favicon.ico" />
 
-// Connect to SQLite database
-const db = new sqlite3.Database('./example.db', (err) => {
-  if (err) {
-    console.error("Error opening database: " + err.message);
-  } else {
-    console.log("Connected to the SQLite database.");
-  }
-});
+  <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+  <title>Hello World!</title>
 
-// API Endpoint to insert data
-app.post('/insert', (req, res) => {
-  const { name, age } = req.body;
+  <!-- The website stylesheet -->
+  <link rel="stylesheet" href="/style.css" />
 
-  const stmt = db.prepare("INSERT INTO users (name, age) VALUES (?, ?)");
-  stmt.run(name, age, function(err) {
-    if (err) {
-      res.status(500).json({ message: 'Failed to insert data' });
-    } else {
-      res.status(200).json({ message: 'Data inserted successfully' });
-    }
-  });
-  stmt.finalize();
-});
+  <!-- The website JavaScript file -->
+  <script src="/script.js" defer></script>
+</head>
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+<body>
+  <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+  <div class="wrapper">
+    <div class="content" role="main">
+      <h1 class="title">Oh hi website!</h1>
+      <img src="/cool-website.svg" class="illustration" alt="cool website" />
+      <div class="instructions">
+        <p>
+          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
+        </p>
+        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
+        </p>
+
+      </div>
+
+      <footer class="footer">
+        <div>
+          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>
