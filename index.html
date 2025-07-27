@@ -2,54 +2,89 @@
 <html lang="en">
 
 <head>
-  <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://glitch.com/favicon.ico" />
-
-  <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
   <title>Council of Nations Bot</title>
+  <link rel="icon" href="https://i.imgur.com/rD4cF9j.png" /> <!-- Replace with your own favicon -->
 
-  <!-- The website stylesheet -->
+  <!-- Custom stylesheet -->
   <link rel="stylesheet" href="/style.css" />
 
-  <!-- The website JavaScript file -->
+  <!-- Optional script -->
   <script src="/script.js" defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #121212;
+      color: #f5f5f5;
+      text-align: center;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #cccccc;
+      margin-bottom: 2rem;
+    }
+
+    .illustration {
+      width: 200px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #5865F2;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-group a:hover {
+      background: #4752C4;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
 </head>
 
 <body>
-  <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
   <div class="wrapper">
-    <div class="content" role="main">
-      <h1 class="title">Oh hi website!</h1>
-      <img src="/cool-website.svg" class="illustration" alt="cool website" />
-      <div class="instructions">
-        <p>
-          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
-        </p>
-        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
-        </p>
+    <h1>Council of Nations Bot</h1>
+    <p class="subtitle">Create your nation, forge alliances, and dominate the world in a strategic RP Discord game.</p>
 
-      </div>
+    <img src="https://i.imgur.com/ZUbzRcz.png" class="illustration" alt="Council of Nations Icon" />
 
-      <footer class="footer">
-        <div>
-          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
-        </div>
-      </footer>
+    <div class="btn-group">
+      <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank">➕ Invite Bot</a>
+      <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank">🌐 Join Discord</a>
+      <a href="/commands.html">📜 View Commands</a>
     </div>
+
+    <footer>
+      <p>Made with ❤️ by the CoN team • <a href="https://github.com/yourrepo">GitHub</a></p>
+    </footer>
   </div>
 </body>
 
